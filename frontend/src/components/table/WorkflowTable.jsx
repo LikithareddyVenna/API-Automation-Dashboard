@@ -1,0 +1,93 @@
+import StatusBadge from "./StatusBadge";
+
+const workflows = [
+  {
+    id: 1,
+    name: "Payment Sync",
+    status: "Success",
+    trigger: "Webhook",
+    runs: 125,
+    lastRun: "2 mins ago",
+  },
+  {
+    id: 2,
+    name: "WhatsApp Alert",
+    status: "Failed",
+    trigger: "API",
+    runs: 98,
+    lastRun: "5 mins ago",
+  },
+  {
+    id: 3,
+    name: "Razorpay Hook",
+    status: "Running",
+    trigger: "Manual",
+    runs: 45,
+    lastRun: "10 mins ago",
+  },
+];
+
+export default function WorkflowTable() {
+  return (
+    <div className="bg-white rounded-3xl shadow-sm p-6">
+
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-semibold">
+          Workflow List
+        </h2>
+
+        <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+          Create Workflow
+        </button>
+      </div>
+
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full">
+
+          <thead>
+            <tr className="border-b text-gray-500">
+              <th className="text-left py-4">Workflow</th>
+              <th className="text-left py-4">Status</th>
+              <th className="text-left py-4">Trigger</th>
+              <th className="text-left py-4">Runs</th>
+              <th className="text-left py-4">Last Run</th>
+              <th className="text-left py-4">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {workflows.map((workflow) => (
+              <tr
+                key={workflow.id}
+                className="border-b hover:bg-gray-50"
+              >
+                <td className="py-5 font-medium">
+                  {workflow.name}
+                </td>
+
+                <td>
+                  <StatusBadge status={workflow.status} />
+                </td>
+
+                <td>{workflow.trigger}</td>
+
+                <td>{workflow.runs}</td>
+
+                <td>{workflow.lastRun}</td>
+
+                <td>
+                  <button className="text-indigo-600 font-medium hover:underline">
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  );
+}
