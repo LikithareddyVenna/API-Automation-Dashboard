@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: api-integration-dashboard
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/api_integration_db
+    username: postgres
+    password: postgres
+
+server:
+  port: 8080
+
+jwt:
+  secret: my-super-secret-key-my-super-secret-key-my-super-secret-key
+  expiration: 86400000
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
