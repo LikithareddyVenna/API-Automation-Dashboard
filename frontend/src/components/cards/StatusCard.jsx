@@ -72,7 +72,7 @@ export default function StatusCard({
          vs last month
         </p>
 
-      </div>
+    </div>
 
     </div>
   );

@@ -1,5 +1,12 @@
-import IntegrationCard from "../../components/cards/IntegrationCard";
+import IntegrationCard from "../../components/table/IntegrationTable";
+import SpinnerLoader from "../../components/loaders/SpinnerLoader";
+import { useState } from "react";
 export default function Integration() {
+  const [search, setSearch] = useState("");
+  const loading = false; //for testing
+  if (loading){
+    return <SpinnerLoader />;
+  }
   return (
     <div className="space-y-6">
 
@@ -13,35 +20,18 @@ export default function Integration() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <input
+      type="text"
+      placeholder="Search integrations..."
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+      className="w-full md:w-80 px-4 py-2 border rounded-lg"
+      />
 
-        <IntegrationCard
-          name="Razorpay"
-          status="Connected"
-        />
-
-        <IntegrationCard
-          name="WhatsApp Business"
-          status="Connected"
-        />
-
-        <IntegrationCard
-          name="Gmail"
-          status="Not Connected"
-        />
-
-        <IntegrationCard
-          name="Slack"
-          status="Not Connected"
-        />
-
-        <IntegrationCard
-          name="Webhook API"
-          status="Connected"
-        />
-
-      </div>
+      <IntegrationCard search={search} />
 
     </div>
   );
 }
+
+      

@@ -21,7 +21,21 @@ const payments = [
   },
 ];
 
-export default function PaymentTable() {
+export default function PaymentTable( { search, dateFilter, } ) {
+
+  const filteredPayments = payments.filter((payment) =>
+    {
+      const matchesSearch =
+      payment.id
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+      const matchesDate =
+      dateFilter === "All Dates" ||
+      payment.date === dateFilter;
+
+      return matchesSearch && matchesDate;
+    });
   return (
     <div className="bg-white rounded-3xl shadow-sm p-6">
 
@@ -48,7 +62,24 @@ export default function PaymentTable() {
         </thead>
 
         <tbody>
-          {payments.map((payment) => (
+
+          {filteredPayments.length === 0 ? (
+            <tr>
+              <td
+                colSpan="5"
+                className="py-10 text-center text-gray-500"
+              >
+                <h3 className="text-lg font-semibold text-gray-700">
+                  No payments found
+                </h3>
+
+                <p className="mt-1">
+                Try changing your search.
+                </p>
+              </td>
+            </tr> 
+          ) : (
+          filteredPayments.map((payment) => (
             <tr
               key={payment.id}
               className="border-b hover:bg-gray-50"
@@ -69,7 +100,8 @@ export default function PaymentTable() {
                 </button>
               </td>
             </tr>
-          ))}
+          ))
+        )}
         </tbody>
 
       </table>

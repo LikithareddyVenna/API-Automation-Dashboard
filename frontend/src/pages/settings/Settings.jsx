@@ -1,4 +1,10 @@
+import SpinnerLoader from "../../components/loaders/SpinnerLoader";
 export default function Settings() {
+    const loading = false; // testing
+
+  if (loading) {
+    return <SpinnerLoader />;
+  }
   return (
     <div className="space-y-6">
 

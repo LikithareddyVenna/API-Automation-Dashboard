@@ -28,6 +28,7 @@ const workflows = [
 ];
 
 export default function WorkflowTable({ search , statusFilter }) {
+   const loading = false;  //for testing
   const filteredWorkflows = workflows.filter((workflow) => {
     const matchesSearch =
       workflow.name
@@ -40,7 +41,10 @@ export default function WorkflowTable({ search , statusFilter }) {
 
     return matchesSearch && matchesStatus;
   });
-
+  
+  if (loading) {  
+    return <TableLoader />;
+    }
   return (
     <div className="bg-white rounded-3xl shadow-sm p-6">
 

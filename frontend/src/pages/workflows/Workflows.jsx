@@ -1,7 +1,13 @@
 import { useState } from "react";
 import WorkflowTable from "../../components/table/WorkflowTable";
+import SpinnerLoader from "../../components/loaders/SpinnerLoader";
 
 export default function Workflows() {
+  const loading = false; // testing
+
+  if (loading) {
+    return <SpinnerLoader />;
+  }
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All Status");
   return (

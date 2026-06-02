@@ -1,6 +1,8 @@
 import StatusCard from "../../components/cards/StatusCard";
 import PaymentTable from "../../components/table/PaymentTable";
-
+import SpinnerLoader from "../../components/loaders/SpinnerLoader";
+import { useState } from "react";
+import DateFilter from "../../components/filters/DateFilter";
 import {
   IndianRupee,
   CheckCircle,
@@ -8,6 +10,13 @@ import {
 } from "lucide-react";
 
 export default function Payments() {
+  const [search, setSearch] = useState("");
+  const [dateFilter, setDateFilter] = useState("All Dates");
+   const loading = false;
+
+  if (loading) {
+    return <SpinnerLoader />;
+  }
   return (
     <div className="space-y-6">
 
@@ -50,9 +59,24 @@ export default function Payments() {
         />
 
       </div>
+      <div className="flex flex-col md:flex-row gap-4">
 
+        <input
+          type="text"
+          placeholder="Search payments..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border rounded-lg px-4 py-2 md:w-80"
+        />
+
+        <DateFilter
+          value={dateFilter}
+          onChange={setDateFilter}
+        />
+
+      </div>
       {/* Payment Table */}
-      <PaymentTable />
+      <PaymentTable search={search} dateFilter={dateFilter} />
 
     </div>
   );

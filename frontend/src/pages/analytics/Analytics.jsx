@@ -1,6 +1,11 @@
 import AnalyticsChart from "../../components/charts/AnalyticsChart";
-
+import SpinnerLoader from "../../components/loaders/SpinnerLoader";
 export default function Analytics() {
+  const loading = false; // testing
+
+  if (loading) {
+    return <SpinnerLoader />;
+  }
   return (
     <div className="space-y-6">
       <div>
