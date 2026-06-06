@@ -1,6 +1,8 @@
 import { useState } from "react";
 import WorkflowTable from "../../components/table/WorkflowTable";
 import SpinnerLoader from "../../components/loaders/SpinnerLoader";
+import SearchBar from "../../components/search/SearchBar";
+import StatusFilter from "../../components/filters/StatusFilter";
 
 export default function Workflows() {
   const loading = false; // testing
@@ -26,24 +28,16 @@ export default function Workflows() {
       {/* Search + Filter */}
       <div className="flex justify-between items-center">
 
-        <input
-          type="text"
-          placeholder="Search workflows..."
+        <SearchBar
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="border rounded-lg px-4 py-2 w-72"
+          onChange={setSearch}
+          placeholder="Search workflows..."
         />
 
-        <select
+        <StatusFilter
           value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="border rounded-lg px-4 py-2"
-        >
-          <option>All Status</option>
-          <option>Success</option>
-          <option>Failed</option>
-          <option>Running</option>
-        </select>
+          onChange={setStatusFilter}
+        />
 
       </div>
 

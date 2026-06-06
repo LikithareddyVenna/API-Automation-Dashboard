@@ -1,4 +1,8 @@
 import SpinnerLoader from "../../components/loaders/SpinnerLoader";
+import ProfileSettings from "../../components/settings/ProfileSettings";
+import NotificationSettings from "../../components/settings/NotificationSettings";
+import ApiKeySettings from "../../components/settings/ApiKeySettings";
+import SecuritySettings from "../../components/settings/SecuritySettings";
 export default function Settings() {
     const loading = false; // testing
 
@@ -17,85 +21,11 @@ export default function Settings() {
           Manage account preferences.
         </p>
       </div>
-
-      {/* Profile */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm">
-
-        <h2 className="text-xl font-semibold mb-4">
-          Profile Information
-        </h2>
-
-        <div className="space-y-4">
-
-          <input
-            type="text"
-            placeholder="Full Name"
-            className="w-full border rounded-lg px-4 py-3"
-          />
-
-          <input
-            type="email"
-            placeholder="Email Address"
-            className="w-full border rounded-lg px-4 py-3"
-          />
-
-          <button className="bg-indigo-600 text-white px-5 py-2 rounded-lg">
-            Save Changes
-          </button>
-
-        </div>
-
-      </div>
-
-      {/* Notifications */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm">
-
-        <h2 className="text-xl font-semibold mb-4">
-          Notifications
-        </h2>
-
-        <div className="space-y-3">
-
-          <label className="flex justify-between">
-            Email Notifications
-            <input type="checkbox" defaultChecked />
-          </label>
-
-          <label className="flex justify-between">
-            Workflow Alerts
-            <input type="checkbox" defaultChecked />
-          </label>
-
-          <label className="flex justify-between">
-            Payment Alerts
-            <input type="checkbox" />
-          </label>
-
-        </div>
-
-      </div>
-
-      {/* API Key */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm">
-
-        <h2 className="text-xl font-semibold mb-4">
-          API Keys
-        </h2>
-
-        <div className="flex justify-between items-center">
-
-          <code>
-            sk_live_xxxxxxxxxxxxxxxxx
-          </code>
-
-          <button className="bg-slate-900 text-white px-4 py-2 rounded-lg">
-            Regenerate
-          </button>
-
-        </div>
-
-      </div>
-
+  
+      <ProfileSettings />
+      <NotificationSettings />
+      <ApiKeySettings />
+      <SecuritySettings />
     </div>
   );
 }

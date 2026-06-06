@@ -1,4 +1,4 @@
-export default function IntegrationCard({ name, status }) {
+export default function IntegrationCard({ name, status, type }) {
   return (
     <div className="bg-white rounded-3xl shadow-sm p-6 hover:shadow-md transition">
 
@@ -6,6 +6,10 @@ export default function IntegrationCard({ name, status }) {
         {name}
       </h3>
 
+      <p className="text-gray-500 mt-1">
+        {type}
+      </p>
+      
       <div className="mt-4">
         <span
           className={`px-3 py-1 rounded-full text-sm ${

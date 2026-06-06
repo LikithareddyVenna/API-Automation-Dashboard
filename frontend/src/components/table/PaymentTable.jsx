@@ -1,31 +1,15 @@
 import StatusBadge from "./StatusBadge";
-
-const payments = [
-  {
-    id: "#PAY001",
-    amount: "₹2,500",
-    status: "Success",
-    date: "Today",
-  },
-  {
-    id: "#PAY002",
-    amount: "₹1,200",
-    status: "Failed",
-    date: "Today",
-  },
-  {
-    id: "#PAY003",
-    amount: "₹5,000",
-    status: "Running",
-    date: "Yesterday",
-  },
-];
-
+import { payments } from "../../data/payments";
+import EmptyState from "../empty-state/EmptyState";
+import SkeletonLoader from "../loaders/SkeletonLoader";
 export default function PaymentTable( { search, dateFilter, } ) {
-
+  const loading = false; //for testing
+  if (loading) {
+    return <SkeletonLoader />;
+  }
   const filteredPayments = payments.filter((payment) =>
     {
-      const matchesSearch =
+      const matchesSearch = 
       payment.id
         .toLowerCase()
         .includes(search.toLowerCase());
@@ -48,8 +32,8 @@ export default function PaymentTable( { search, dateFilter, } ) {
           Export
         </button>
       </div>
-
-      <table className="w-full">
+      <div className="overflow-x-auto">
+        <table className="w-full">
 
         <thead>
           <tr className="border-b text-gray-500">
@@ -65,17 +49,11 @@ export default function PaymentTable( { search, dateFilter, } ) {
 
           {filteredPayments.length === 0 ? (
             <tr>
-              <td
-                colSpan="5"
-                className="py-10 text-center text-gray-500"
-              >
-                <h3 className="text-lg font-semibold text-gray-700">
-                  No payments found
-                </h3>
-
-                <p className="mt-1">
-                Try changing your search.
-                </p>
+              <td colSpan="5">
+                <EmptyState
+                  title="No payments found"
+                  message="Try changing your search."
+                />
               </td>
             </tr> 
           ) : (
@@ -105,7 +83,7 @@ export default function PaymentTable( { search, dateFilter, } ) {
         </tbody>
 
       </table>
-
+      </div>
     </div>
   );
 }

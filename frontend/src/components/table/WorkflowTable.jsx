@@ -1,5 +1,6 @@
 import StatusBadge from "./StatusBadge";
 import TableLoader from "../loaders/TableLoader";
+import EmptyState from "../empty-state/EmptyState";
 const workflows = [
   {
     id: 1,
@@ -77,16 +78,11 @@ export default function WorkflowTable({ search , statusFilter }) {
           <tbody>
             {filteredWorkflows.length === 0 ? (
               <tr>
-                <td colSpan="6" 
-                className="py-10 text-center text-gray-500">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-700">
-                      No workflows found
-                    </h3>
-                    <p className="text-gray-500 mt-1">
-                      Try changing your search or filter.
-                    </p>
-                  </div>
+                <td colSpan="6">
+                  <EmptyState
+                    title="No workflows found"
+                    message="Try changing your search or filter criteria."
+                  />
                 </td>
               </tr>
             ) : (

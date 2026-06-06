@@ -7,15 +7,7 @@ import {
   CartesianGrid,
 } from "recharts";
 
-const data = [
-  { name: "Mon", workflows: 40 },
-  { name: "Tue", workflows: 55 },
-  { name: "Wed", workflows: 35 },
-  { name: "Thu", workflows: 70 },
-  { name: "Fri", workflows: 60 },
-  { name: "Sat", workflows: 90 },
-  { name: "Sun", workflows: 75 },
-];
+import { workflowAnalytics } from "../../data/analytics";
 
 export default function AnalyticsChart() {
   return (
@@ -39,58 +31,12 @@ export default function AnalyticsChart() {
         </h2>
       </div>
 
-      {/* Analytics Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-
-        <div>
-          <p className="text-sm text-slate-500">
-            Total Runs
-          </p>
-
-          <h3 className="text-2xl font-bold text-slate-900 mt-1">
-            12.4K
-          </h3>
-        </div>
-
-        <div>
-          <p className="text-sm text-slate-500">
-            Success Rate
-          </p>
-
-          <h3 className="text-2xl font-bold text-green-600 mt-1">
-            98.2%
-          </h3>
-        </div>
-
-        <div>
-          <p className="text-sm text-slate-500">
-            Avg Response
-          </p>
-
-          <h3 className="text-2xl font-bold text-slate-900 mt-1">
-            1.4s
-          </h3>
-        </div>
-
-        <div>
-
-          <p className="text-sm text-slate-500">
-            Failed Runs
-          </p>
-
-          <h3 className="text-2xl font-bold text-red-500 mt-1">
-            32
-          </h3>
-        </div>
-
-      </div>
-
       <div className="overflow-x-auto">
 
         <LineChart
           width={900}
           height={300}
-          data={data}
+          data={workflowAnalytics}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis dataKey="name" axisLine={false} tickLine={false} />

@@ -38,6 +38,7 @@ export default function IntegrationTable({ search }) {
 
   return (
     <div className="bg-white rounded-3xl shadow-sm p-6">
+    <div className="overflow-x-auto"></div>
       <h2 className="text-2xl font-semibold mb-6">
         Integrations
       </h2>
@@ -80,11 +81,29 @@ export default function IntegrationTable({ search }) {
 
               <td>{integration.type}</td>
 
-              <td>{integration.status}</td>
+              <td>
+                <span
+                  className={`px-3 py-1 rounded-full text-sm ${
+                    integration.status === "Connected"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                  }`}
+               >
+                  {integration.status}
+                </span>
+              </td>
 
               <td>
-                <button className="text-indigo-600 hover:underline">
-                  Manage
+                <button
+                  className={`font-medium ${
+                    integration.status === "Connected"
+                      ? "text-indigo-600"
+                      : "text-green-600"
+                  }`}
+                >
+                  {integration.status === "Connected"
+                    ? "Manage"
+                    : "Connect"}
                 </button>
               </td>
             </tr>
@@ -92,6 +111,7 @@ export default function IntegrationTable({ search }) {
         )}
         </tbody>
       </table>
+      
     </div>
   );
 }

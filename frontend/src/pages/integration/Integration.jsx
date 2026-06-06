@@ -1,8 +1,30 @@
-import IntegrationCard from "../../components/table/IntegrationTable";
+import { integrations } from "../../data/integrations";
 import SpinnerLoader from "../../components/loaders/SpinnerLoader";
+import IntegrationStats from "../../components/stats/IntegrationStats";
+import IntegrationCard from "../../components/cards/IntegrationCard";
+import SearchBar from "../../components/search/SearchBar";
+import CategoryFilter from "../../components/filters/CategoryFilter";
+import EmptyState from "../../components/empty-state/EmptyState";
 import { useState } from "react";
 export default function Integration() {
   const [search, setSearch] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("All Categories");
+  
+  const filteredIntegrations = integrations.filter(
+  (integration) => {
+    const matchesSearch =
+      integration.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+    const matchesCategory =
+      categoryFilter === "All Categories" ||
+      integration.type.includes(categoryFilter);
+
+    return matchesSearch && matchesCategory;
+  }
+);
+
   const loading = false; //for testing
   if (loading){
     return <SpinnerLoader />;
@@ -19,17 +41,35 @@ export default function Integration() {
           Manage connected services.
         </p>
       </div>
-
-      <input
-      type="text"
-      placeholder="Search integrations..."
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-      className="w-full md:w-80 px-4 py-2 border rounded-lg"
+      <IntegrationStats />
+      <div className="flex flex-col md:flex-row gap-4">
+      <SearchBar
+        value={search}
+        onChange={setSearch}
+        placeholder="Search integrations..."
       />
-
-      <IntegrationCard search={search} />
-
+      <CategoryFilter
+        value={categoryFilter}
+        onChange={setCategoryFilter}
+      />
+      </div>
+      {filteredIntegrations.length === 0 ? (
+        <EmptyState
+          title="No integrations found"
+          message="Try changing your search."
+        />
+      ) : (
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        {filteredIntegrations.map((integration) => (
+          <IntegrationCard
+            key={integration.id}
+            name={integration.name}
+            status={integration.status}
+            type={integration.type}
+          />
+        ))}
+      </div>
+      )}  
     </div>
   );
 }

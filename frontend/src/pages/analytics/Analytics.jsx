@@ -1,5 +1,6 @@
 import AnalyticsChart from "../../components/charts/AnalyticsChart";
 import SpinnerLoader from "../../components/loaders/SpinnerLoader";
+import AnalyticsStats from "../../components/stats/AnalyticsStats";
 export default function Analytics() {
   const loading = false; // testing
 
@@ -18,6 +19,7 @@ export default function Analytics() {
         </p>
       </div>
 
+      <AnalyticsStats />
       <AnalyticsChart />
     </div>
   );
