@@ -1,5 +1,5 @@
 import StatusBadge from "./StatusBadge";
-
+import TableLoader from "../loaders/TableLoader";
 const workflows = [
   {
     id: 1,
@@ -27,7 +27,20 @@ const workflows = [
   },
 ];
 
-export default function WorkflowTable() {
+export default function WorkflowTable({ search , statusFilter }) {
+  const filteredWorkflows = workflows.filter((workflow) => {
+    const matchesSearch =
+      workflow.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+    const matchesStatus =
+      statusFilter === "All Status" ||
+      workflow.status === statusFilter;
+
+    return matchesSearch && matchesStatus;
+  });
+
   return (
     <div className="bg-white rounded-3xl shadow-sm p-6">
 
@@ -58,32 +71,48 @@ export default function WorkflowTable() {
           </thead>
 
           <tbody>
-            {workflows.map((workflow) => (
-              <tr
-                key={workflow.id}
-                className="border-b hover:bg-gray-50"
-              >
-                <td className="py-5 font-medium">
-                  {workflow.name}
-                </td>
-
-                <td>
-                  <StatusBadge status={workflow.status} />
-                </td>
-
-                <td>{workflow.trigger}</td>
-
-                <td>{workflow.runs}</td>
-
-                <td>{workflow.lastRun}</td>
-
-                <td>
-                  <button className="text-indigo-600 font-medium hover:underline">
-                    View Details
-                  </button>
+            {filteredWorkflows.length === 0 ? (
+              <tr>
+                <td colSpan="6" 
+                className="py-10 text-center text-gray-500">
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-700">
+                      No workflows found
+                    </h3>
+                    <p className="text-gray-500 mt-1">
+                      Try changing your search or filter.
+                    </p>
+                  </div>
                 </td>
               </tr>
-            ))}
+            ) : (
+              filteredWorkflows.map((workflow) => (
+                <tr
+                  key={workflow.id}
+                  className="border-b hover:bg-gray-50"
+                >
+                  <td className="py-5 font-medium">
+                    {workflow.name}
+                  </td>
+
+                  <td>
+                    <StatusBadge status={workflow.status} />
+                  </td>
+
+                  <td>{workflow.trigger}</td>
+
+                  <td>{workflow.runs}</td>
+
+                  <td>{workflow.lastRun}</td>
+
+                  <td>
+                    <button className="text-indigo-600 font-medium hover:underline">
+                      View Details
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
 
         </table>
