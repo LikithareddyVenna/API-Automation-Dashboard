@@ -1,8 +1,29 @@
+# Maven
+target/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+
+# Environment
+.env
+
+# IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Backend Build
+backend/target/
+
+# Frontend Build & Dependencies
 node_modules/
 frontend/node_modules/
-
-dist/
 frontend/dist/
-
-.vscode/
-.env
