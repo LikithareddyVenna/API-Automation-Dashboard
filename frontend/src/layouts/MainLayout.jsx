@@ -1,7 +1,8 @@
+import { Outlet } from "react-router-dom";
 import Sidebar from "../components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
 
-export default function MainLayout({ children }) {
+export default function MainLayout( ) {
   return (
     <div className="flex min-h-screen bg-[#f8fafc]">
       
@@ -12,7 +13,7 @@ export default function MainLayout({ children }) {
         <Navbar />
 
         <div className="p-6">
-          {children}
+          <Outlet />
         </div>
 
       </div>
